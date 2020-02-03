@@ -1,5 +1,5 @@
-import loadComponents from './components';
-import loadBlocks from './blocks';
+import loadComponents from './componentsRegister';
+import loadBlocks from './blocksRegister';
 import en from './locale/en';
 import echarts from 'echarts';
 export default (editor, opts = {}) => {

@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-echarts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Grapesjs Echarts",
   "main": "dist/grapesjs-echarts.min.js",
   "repository": {
@@ -19,5 +19,8 @@
   "devDependencies": {
     "grapesjs-cli": "^1.0.11"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "echarts": "^4.6.0"
+  }
 }
