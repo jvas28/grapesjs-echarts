@@ -1,4 +1,4 @@
-import blocks from './blocksRegister';
+import blocks from './blocks';
 export default (editor, opts = {}) => {
   const bm = editor.BlockManager;
   Object.entries(blocks).map(([name, def]) => {

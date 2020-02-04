@@ -1,5 +1,6 @@
 export default {
   label: "Custom Chart",
+  category: 'Charts',
   content: {
     tagName: "div",
     style: {
