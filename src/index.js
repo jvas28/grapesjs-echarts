@@ -1,22 +1,27 @@
 import loadComponents from './componentsRegister';
 import loadBlocks from './blocksRegister';
+import loadTraits from './traitsRegister';
 import en from './locale/en';
 import echarts from 'echarts';
-export default (editor, opts = {}) => {
+import Vue from 'vue';
+export default grapesjs.plugins.add('grapesjs-echarts',(editor, opts = {}) => {
   const options = { ...{
     i18n: {},
     // default options
   },  ...opts };
   editor.echarts = echarts;
+  editor.Vue = Vue;
+  // Add Traits
+  loadTraits(editor, options);
   // Add components
   loadComponents(editor, options);
   // Add blocks
   loadBlocks(editor, options);
-  // Load i18n files
   
+  // Load i18n files
   editor.I18n && editor.I18n.addMessages({
       en,
       ...options.i18n,
   });
 
-};
+});
