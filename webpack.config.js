@@ -1,12 +1,20 @@
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
-
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  entry: {
+    "grapesjs-echarts": "./src/index.js",
+    "grapesjs-echarts.min": "./src/index.js"
+  },
   output: {
-    filename: "grapesjs-echarts.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist")
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
   },
   resolve: {
     alias: {
@@ -32,13 +40,9 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ["vue-style-loader", "css-loader", "sass-loader"]
       }
     ]
   },
-  plugins: [new VueLoaderPlugin()]
+  plugins: [new VueLoaderPlugin(), new MinifyPlugin({}, {})]
 };
