@@ -11,7 +11,7 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "watch": "webpack-dev-server --watch",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "bump": "npm version patch -m 'Bump v%s'"
   },
   "keywords": [
