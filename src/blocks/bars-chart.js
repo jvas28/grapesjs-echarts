@@ -7,7 +7,7 @@ export default {
         width: "300px",
         height: "300px"
       },
-      type: "echarts-custom",
+      type: "echarts-bars",
       script: function() {
         const init = () => {
           const el = this;

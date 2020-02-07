@@ -1,41 +1,56 @@
 export default function(editor) {
-    return {
-      isComponent: el => {
-        try {
-          const settings = el.getAttribute("data-ecg-settings");
-          return !!settings;
-        } catch (e) {
-          return false;
-        }
+  return {
+    isComponent: el => {
+      try {
+        const settings = el.getAttribute("data-ecg-settings");
+        return !!settings;
+      } catch (e) {
+        return false;
+      }
+    },
+    model: {
+      init() {
+        this.on("change:attributes:data-ecg-series", this.handleSeriesChange);
       },
-      model: {
-        init() {
-          this.on("change:attributes:data-ecg-options", this.handleOptionsChange);
-        },
-        handleOptionsChange(a, opt, c) {
-          const options = JSON.parse(opt);
-          if (options) {
-            const chart = editor.echarts.init(this.view.el, null, {
-              renderer: "canvas"
-            });
-            chart.setOption(options);
+      handleSeriesChange(a, s, c) {
+        const map = JSON.parse(s);
+        const series = [
+          {
+            type: "bar",
+            data: map.map(({ value }) => value)
           }
-        },
-        defaults: {
-          // Default props
-          name: "Custom Chart",
-          traits: [
-            "id",
-            "title",
+        ];
+        const xAxis = [{
+          data: map.map(({ label }) => label)
+        }];
+        const options = {
+          series,
+          xAxis,
+          yAxis: [
             {
-              type: "text",
-              label: "Options",
-              name: "data-ecg-options"
+              type: "value"
             }
           ]
+        };
+        if (options) {
+          const chart = editor.echarts.init(this.view.el, null, {
+            renderer: "canvas"
+          });
+          chart.setOption(options);
         }
       },
-      view: {}
-    };
-  }
-  
+      defaults: {
+        // Default props
+        name: "Bar Chart",
+        traits: [
+          "id",
+          "title",
+          {
+            type: "series-trait"
+          }
+        ]
+      }
+    },
+    view: {}
+  };
+}
