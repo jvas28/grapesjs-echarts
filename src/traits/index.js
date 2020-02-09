@@ -1,5 +1,5 @@
-import Series from './series-trait';
+import Series from "./series-trait";
 
 export default {
-    'series-trait': Series,
-}
+	"series-trait": Series,
+};

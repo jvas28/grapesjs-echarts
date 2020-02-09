@@ -1,5 +1,5 @@
 export default {
-    'grapesjs-echarts': {
-        // 'key': 'value',
-    },
+	"grapesjs-echarts": {
+		// 'key': 'value',
+	},
 };

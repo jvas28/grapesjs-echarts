@@ -1,6 +1,6 @@
-import EchartsCustom from './echarts-custom'
-import Bars from './echarts-bars'
+import EchartsCustom from "./echarts-custom";
+import Bars from "./echarts-bars";
 export default {
-   'echarts-custom': EchartsCustom,
-   'echarts-bars': Bars,
+	"echarts-custom": EchartsCustom,
+	"echarts-bars": Bars,
 };

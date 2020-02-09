@@ -30,25 +30,25 @@
 
 <script>
 export default {
-  props: ['label', 'editor','onChange'],
-  data() {
-    return  {
-      series: [],
-    };
-  },
-  methods: {
-    add() {
-      this.series.push({id: new Date().getTime(),label: 'My Bar', value:   100});
-    },
-    remove(serie) {
-      this.series = this.series.filter(({id})=> id!==serie);
-    },
-    save() {
-      this.onChange();
-    }
+	props: ["label", "editor","onChange"],
+	data() {
+		return  {
+			series: [],
+		};
+	},
+	methods: {
+		add() {
+			this.series.push({id: new Date().getTime(),label: "My Bar", value:   100});
+		},
+		remove(serie) {
+			this.series = this.series.filter(({id})=> id!==serie);
+		},
+		save() {
+			this.onChange();
+		}
     
-  }
-}
+	}
+};
 </script>
 
 <style lang='scss' scoped>
