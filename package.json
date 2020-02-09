@@ -9,9 +9,8 @@
     "url": "https://github.com/jvas28/grapesjs-echarts.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "watch": "webpack-dev-server --watch",
-    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open --watch",
+    "build": "webpack --env.production",
     "bump": "npm version patch -m 'Bump v%s'"
   },
   "keywords": [
@@ -24,6 +23,8 @@
     "babel-loader": "^8.0.6",
     "babel-minify-webpack-plugin": "^0.3.1",
     "css-loader": "^3.4.2",
+    "fs": "0.0.1-security",
+    "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3",

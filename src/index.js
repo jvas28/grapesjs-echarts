@@ -4,7 +4,8 @@ import loadTraits from './traitsRegister';
 import en from './locale/en';
 import echarts from 'echarts';
 import Vue from 'vue';
-export default grapesjs.plugins.add('grapesjs-echarts',(editor, opts = {}) => {
+debugger;
+export default (editor, opts = {}) => {
   const options = { ...{
     i18n: {},
     // default options
@@ -24,4 +25,4 @@ export default grapesjs.plugins.add('grapesjs-echarts',(editor, opts = {}) => {
       ...options.i18n,
   });
 
-});
+};
