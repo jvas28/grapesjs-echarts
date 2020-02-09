@@ -1,6 +1,7 @@
 # Grapesjs Echarts
 
-This is a work in progress version of adding chart components to [GrapesJS](https://grapesjs.com/docs/api/component.html) using [Echarts](https://www.echartsjs.com/).
+This is a **WORK IN PROGRESS** version of adding chart components to [GrapesJS](https://grapesjs.com/docs/api/component.html) using [Echarts](https://www.echartsjs.com/).
+
 
 ### HTML
 ```html
@@ -30,47 +31,13 @@ body, html {
 }
 ```
 
-
-## Summary
-
-* Plugin name: `grapesjs-echarts`
-* Components
-    * `component-id-1`
-    * `component-id-2`
-    * ...
-* Blocks
-    * `block-id-1`
-    * `block-id-2`
-    * ...
-
-
-
-## Options
-
-| Option | Description | Default |
-|-|-|-
-| `option1` | Description option | `default value` |
-
-
-
-## Download
-
-* CDN
-  * `https://unpkg.com/grapesjs-echarts`
-* NPM
-  * `npm i grapesjs-echarts`
-* GIT
-  * `git clone https://github.com/jvas28/grapesjs-echarts.git`
-
-
-
 ## Usage
 
 Directly in the browser
 ```html
 <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet"/>
 <script src="https://unpkg.com/grapesjs"></script>
-<script src="path/to/grapesjs-echarts.min.js"></script>
+<script src="https://unpkg.com/grapesjs-echarts.min.js"></script>
 
 <div id="gjs"></div>
 
