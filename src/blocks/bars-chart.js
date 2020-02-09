@@ -5,14 +5,14 @@ export default {
 		tagName: "div",
 		style: {
 			width: "300px",
-			height: "300px"
+			"min-height": "100px"
 		},
 		type: "echarts-bars",
 		script: function() {
 			const init = () => {
 				const chart = echarts.init(this);
 				try {
-					const options = this.getAttribute("data-ecg-options");
+					const options = JSON.parse(this.getAttribute("data-ecg-options"));
 					if (options) {
 						chart.setOption(options);
 					}
@@ -20,7 +20,7 @@ export default {
 					console.log(e);
 				}
 			};
-			if (typeof echarts == "undefined") {
+			if (typeof echarts === "undefined") {
 				var script = document.createElement("script");
 				script.onload = init;
 				script.src =

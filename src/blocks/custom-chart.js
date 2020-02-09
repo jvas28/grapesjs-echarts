@@ -5,7 +5,7 @@ export default {
 		tagName: "div",
 		style: {
 			width: "300px",
-			height: "300px"
+			"min-height": "100px"
 		},
 		type: "echarts-custom",
 		script: function() {

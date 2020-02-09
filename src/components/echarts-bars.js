@@ -37,11 +37,14 @@ export default function(editor) {
 						renderer: "canvas"
 					});
 					chart.setOption(options);
+					this.addAttributes({"data-ecg-options" :JSON.stringify(options)});
+					this.chart = chart;
 				}
 			},
 			defaults: {
 				// Default props
 				name: "Bar Chart",
+				resizable: true,
 				traits: [
 					"id",
 					"title",

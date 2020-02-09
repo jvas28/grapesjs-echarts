@@ -1,5 +1,6 @@
 export default function(editor) {
 	return {
+		extend: "default",
 		isComponent: el => {
 			try {
 				const settings = el.getAttribute("data-ecg-settings");
@@ -24,6 +25,7 @@ export default function(editor) {
 			defaults: {
 				// Default props
 				name: "Custom Chart",
+				resizable: true,
 				traits: [
 					"id",
 					"title",
