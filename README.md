@@ -1,5 +1,7 @@
 # Grapesjs Echarts
 
+[![Build Status](https://travis-ci.org/jvas28/grapesjs-echarts.svg?branch=master)](https://travis-ci.org/jvas28/grapesjs-echarts)
+
 This is a **WORK IN PROGRESS** version of adding chart components to [GrapesJS](https://grapesjs.com/docs/api/component.html) using [Echarts](https://www.echartsjs.com/).
 
 
