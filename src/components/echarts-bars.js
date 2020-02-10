@@ -17,7 +17,7 @@ export default function(editor) {
 				const series = [
 					{
 						type: "bar",
-						data: map.map(({ value }) => value)
+						data: map.map(({ value,color }) => ({value, itemStyle: { color }}))
 					}
 				];
 				const xAxis = [{

@@ -15,6 +15,11 @@
             </div>
           </div>
           <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
+            <div class="gjs-field gjs-field-text" data-input>
+              <input type="text" placeholder="blue"  v-model="serie.color" />
+            </div>
+          </div>
+          <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
             <button class="btn btn-icon" @click="remove(serie.id)">-</button>
           </div>
         </div>
@@ -38,7 +43,7 @@ export default {
 	},
 	methods: {
 		add() {
-			this.series.push({id: new Date().getTime(),label: "My Bar", value:   100});
+			this.series.push({id: new Date().getTime(),label: "My Bar", value:   100, color: "blue"});
 		},
 		remove(serie) {
 			this.series = this.series.filter(({id})=> id!==serie);
