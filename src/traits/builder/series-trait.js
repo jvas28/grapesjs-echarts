@@ -8,7 +8,7 @@ export default (label) => ({
 		const vueInstance = new Vue({
 			render: h =>
 				h(SeriesSelector, {
-					props: { editor, label, onChange:() => this.onChange() }
+					props: { editor, label, onChange:() => this.onEvent({component}) }
 				})
 		}).$mount();
 		const [inputInstance] = vueInstance.$children;
@@ -17,8 +17,8 @@ export default (label) => ({
 	},
 	// Update the component based element changes
 	onEvent({ component }) {
-		const series = this.inputInstance.series;
-		component.addAttributes({"data-ecg-series": JSON.stringify(series)});
+		const {series, theme} = this.inputInstance;
+		component.addAttributes({"data-ecg-series": JSON.stringify(series),"data-ecg-theme":theme});
 	},
 	onUpdate({ component }) {
 		const value = component.getAttributes()["data-ecg-series"] || null;

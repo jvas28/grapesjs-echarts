@@ -4,6 +4,11 @@ import loadTraits from "./traitsRegister";
 import en from "./locale/en";
 import echarts from "echarts";
 import Vue from "vue";
+
+require("echarts/theme/dark");
+require("echarts/theme/macarons");
+require("echarts/theme/dark-blue");
+
 export default (editor, opts = {}) => {
 	const options = { ...{
 		i18n: {},

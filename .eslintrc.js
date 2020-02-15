@@ -39,5 +39,6 @@ module.exports = {
     },
     "globals": {
         echarts: true,
+        define: true,
     }
 };
