@@ -1,5 +1,6 @@
-import Series from "./series-trait";
+import series from "./builder/series-trait";
 
 export default {
-	"series-trait": Series,
+	"bars-trait": series("Bars"),
+	"pie-trait": series("Slices"),
 };

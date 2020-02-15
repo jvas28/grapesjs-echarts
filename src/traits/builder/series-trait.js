@@ -1,5 +1,5 @@
-import MultipleProperties from "../vue/multiple-properties.vue";
-export default {
+import SeriesSelector from "../../vue/series-selector.vue";
+export default (label) => ({
 	// Expects as return a simple HTML string or an HTML element
 	noLabel: true,
 	createInput({ component }) {
@@ -7,8 +7,8 @@ export default {
 		const { Vue } = editor;
 		const vueInstance = new Vue({
 			render: h =>
-				h(MultipleProperties, {
-					props: { editor, label: "Bars", onChange:() => this.onChange() }
+				h(SeriesSelector, {
+					props: { editor, label, onChange:() => this.onChange() }
 				})
 		}).$mount();
 		const [inputInstance] = vueInstance.$children;
@@ -26,4 +26,4 @@ export default {
 			this.inputInstance.series = JSON.parse(value);
 		}
 	},
-};
+});

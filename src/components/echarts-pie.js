@@ -16,7 +16,7 @@ export default function(editor) {
 				const map = JSON.parse(s);
 				const series = [
 					{
-						type: "bar",
+						type: "pie",
 						data: map.map(({ value,color }) => ({value, itemStyle: { color }}))
 					}
 				];
@@ -49,7 +49,7 @@ export default function(editor) {
 					"id",
 					"title",
 					{
-						type: "bars-trait"
+						type: "pie-trait"
 					}
 				]
 			}
