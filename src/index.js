@@ -22,7 +22,7 @@ export default (editor, opts = {}) => {
 	const registeredComponents = loadComponents(editor, options);
 	// Add blocks
 	loadBlocks(editor, options);
-	editor.on("component:styleUpdate:width", (component) => {
+	const resizeComponent = (component) => {
 		registeredComponents.map((name)=>{
 			if(component.is(name)) {
 				if(component.chart) {
@@ -32,7 +32,9 @@ export default (editor, opts = {}) => {
 			}
 		});
 		
-	});
+	};
+	editor.on("component:styleUpdate:width", resizeComponent);
+	editor.on("component:styleUpdate:height", resizeComponent);
 	// Load i18n files
 	editor.I18n && editor.I18n.addMessages({
 		en,

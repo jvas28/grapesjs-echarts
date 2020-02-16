@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="gjs-trt-traits gjs-one-bg gjs-two-color">
-      <div class="gjs-traits-label trait-header">
-        {{label}}
-        <button @click="add" class="btn btn-icon">+</button>
-      </div>
-      
       <div class="gjs-trt-trait">
         <div class="gjs-label-wrp" data-label>
           <div class="gjs-label" title="Id">Theme</div>
@@ -19,6 +14,10 @@
               </select>
             </div>
           </div>
+      </div>
+      <div class="gjs-traits-label trait-header">
+        {{label}}
+        <button @click="add" class="btn btn-icon">+</button>
       </div>
       <div class="gjs-trt-trait" v-for="serie in series" :key="serie.id">
         <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
@@ -56,14 +55,13 @@ export default {
 		return {
 			series: [],
 			theme: "macarons",
-      
-		};
+   	};
 	},
 	methods: {
 		add() {
 			this.series.push({
 				id: new Date().getTime(),
-				label: "New Category",
+				label: `Category ${this.series.length+1}`,
 				value: 100,
 				color: null
 			});
@@ -81,7 +79,6 @@ export default {
 <style lang='scss' scoped>
 .gjs-trt-traits {
   .trait-header {
-    padding: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

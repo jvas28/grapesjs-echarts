@@ -104,7 +104,10 @@ Build the source
 $ npm run build
 ```
 
+## Credits
 
+### Icons
+Designed by [Smartline](https://www.flaticon.com/authors/smartline) from [www.flaticon.com](www.flaticon.com)
 
 ## License
 

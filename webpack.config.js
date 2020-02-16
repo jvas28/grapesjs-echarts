@@ -36,6 +36,10 @@ module.exports = (env = {}) => {
 		module: {
 			rules: [
 				{
+					test: /\.svg$/,
+					loader: "svg-inline-loader"
+				},
+				{
 					test: /\.vue$/,
 					loader: "vue-loader",
 				},

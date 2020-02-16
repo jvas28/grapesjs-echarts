@@ -1,8 +1,10 @@
 import CustomChart from "./custom-chart";
 import BarsChart from "./bars-chart";
 import PieChart from "./pie-chart";
+import DonutChart from "./donut-chart";
 export default {
-	"custom-chart": CustomChart,
 	"bars-chart": BarsChart,
-	"pie-chart": PieChart
+	"pie-chart": PieChart,
+	"donut-chart": DonutChart,
+	"custom-chart": CustomChart,
 };

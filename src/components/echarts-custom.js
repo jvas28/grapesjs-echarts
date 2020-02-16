@@ -27,8 +27,6 @@ export default function(editor) {
 				name: "Custom Chart",
 				resizable: true,
 				traits: [
-					"id",
-					"title",
 					{
 						type: "text",
 						label: "Options",
