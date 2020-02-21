@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-echarts",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Grapesjs Echarts",
   "main": "dist/grapesjs-echarts.min.js",
   "author": "Julio Vasconez",
