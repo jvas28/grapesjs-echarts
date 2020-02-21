@@ -56,7 +56,7 @@ export default {
 		return {
 			series: [],
 			theme: "",
-   	};
+		};
 	},
 	methods: {
 		add() {
