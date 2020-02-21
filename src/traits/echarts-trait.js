@@ -1,5 +1,5 @@
-import SeriesSelector from "../../vue/series-selector.vue";
-export default (label) => ({
+import SeriesSelector from "../vue/series-selector.vue";
+export default {
 	// Expects as return a simple HTML string or an HTML element
 	noLabel: true,
 	createInput({ component }) {
@@ -8,7 +8,7 @@ export default (label) => ({
 		const vueInstance = new Vue({
 			render: h =>
 				h(SeriesSelector, {
-					props: { editor, label, onChange:() => this.onEvent({component}) }
+					props: { editor, label: "Items", onChange:() => this.onEvent({component}) }
 				})
 		}).$mount();
 		const [inputInstance] = vueInstance.$children;
@@ -26,4 +26,4 @@ export default (label) => ({
 			this.inputInstance.series = JSON.parse(value);
 		}
 	},
-});
+};

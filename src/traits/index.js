@@ -1,6 +1,5 @@
-import series from "./builder/series-trait";
+import echarts from "./echarts-trait";
 
 export default {
-	"bars-trait": series("Bars"),
-	"pie-trait": series("Slices"),
+	"echarts-trait": echarts,
 };

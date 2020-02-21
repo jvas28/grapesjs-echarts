@@ -8,6 +8,7 @@
         <div class="gjs-field-wrp gjs-field-wrp--text">
             <div class="gjs-field gjs-field-text">
               <select v-model="theme" data-input>
+                 <option value="" disabled selected>Select a Theme</option>
                 <option value="macarons">Macarons</option>
                 <option value="dark">Dark</option>
                 <option value="dark-blue">Dark Blue</option>
@@ -54,7 +55,7 @@ export default {
 	data() {
 		return {
 			series: [],
-			theme: "macarons",
+			theme: "",
    	};
 	},
 	methods: {
