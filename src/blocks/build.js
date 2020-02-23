@@ -5,7 +5,6 @@ export default function({
 	type="my-echart",
 	category = "Charts",
 }){ 
-	console.log(icon, label, type);
 	return {
 		label: `${icon} ${label}`,
 		category,

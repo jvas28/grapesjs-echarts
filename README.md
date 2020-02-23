@@ -2,36 +2,31 @@
 
 [![Build Status](https://travis-ci.org/jvas28/grapesjs-echarts.svg?branch=master)](https://travis-ci.org/jvas28/grapesjs-echarts)
 
-This is a **WORK IN PROGRESS** version of adding chart components to [GrapesJS](https://grapesjs.com/docs/api/component.html) using [Echarts](https://www.echartsjs.com/).
+This is a **WORK IN PROGRESS** version of adding chart components to [GrapesJS](https://grapesjs.com/docs/api/component.html) using [Echarts](https://www.echartsjs.com/) library. 
+
+Give it a try in
+[Code Pen](https://codepen.io/jvas28/pen/ZEGByOq).
+
+Check a basic result [here](https://codepen.io/jvas28/pen/ZEGByOq).
 
 
-### HTML
-```html
-<link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
-<script src="https://unpkg.com/grapesjs"></script>
-<script src="https://unpkg.com/grapesjs-echarts"></script>
 
-<div id="gjs"></div>
-```
 
-### JS
-```js
-const editor = grapesjs.init({
-	container: '#gjs',
-  height: '100%',
-  fromElement: true,
-  storageManager: false,
-  plugins: ['grapesjs-echarts'],
-});
-```
 
-### CSS
-```css
-body, html {
-  margin: 0;
-  height: 100%;
-}
-```
+## Available Components
+Currently there are only 4 components.
+- Bars
+- Pie
+- Donut
+- Custom
+<p align="center">
+<img src="screenshots/blocks.png" width="200">
+</p>
+
+
+### Custom Component
+
+
 
 ## Usage
 
@@ -108,6 +103,13 @@ $ npm run build
 
 ### Icons
 Designed by [Smartline](https://www.flaticon.com/authors/smartline) from [www.flaticon.com](www.flaticon.com)
+
+## Screenshots
+
+![Bars](screenshots/bars-chart.png)
+![Pie](screenshots/pie-chart.png)
+![Donut](screenshots/donut-chart.png)
+
 
 ## License
 
