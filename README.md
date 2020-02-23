@@ -14,17 +14,31 @@ Check a basic result [here](https://codepen.io/jvas28/pen/ZEGByOq).
 
 
 ## Available Components
-Currently there are only 4 components.
-- Bars
-- Pie
-- Donut
+Currently there are only 3 chart components.
+- `Bars Chart`
+- `Pie Chart`
+- `Donut Chart`
+
+And a special one, the `Custom Chart` which will allow you to create any type of chart by adding the `echarts.options` in JSON string format while I keep bringing more `Chart Components` and `Settings`. 
+
 - Custom
 <p align="center">
 <img src="screenshots/blocks.png" width="200">
 </p>
 
+## Available Settings
+- Theme
+- Items
+  - Name
+  - Value
+  - Color
 
-### Custom Component
+<p align="center">
+<img src="screenshots/setup.png" width="200">
+</p>
+
+This settings are available for all components but `Custom Chart`.
+
 
 
 
