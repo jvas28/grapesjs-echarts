@@ -21,7 +21,6 @@ Currently there are only 3 chart components.
 
 And a special one, the `Custom Chart` which will allow you to create any type of chart by adding the `echarts.options` in JSON string format while I keep bringing more `Chart Components` and `Settings`. 
 
-- Custom
 <p align="center">
 <img src="screenshots/blocks.png" width="200">
 </p>
