@@ -7,7 +7,7 @@ This is a **WORK IN PROGRESS** version of adding chart components to [GrapesJS](
 Give it a try in
 [Code Pen](https://codepen.io/jvas28/pen/ZEGByOq).
 
-Check a basic result [here](https://codepen.io/jvas28/pen/ZEGByOq).
+Check a basic result [here](https://codepen.io/jvas28/pen/qBdRWBp).
 
 
 
