@@ -3,21 +3,21 @@
     <div class="gjs-trt-traits gjs-one-bg gjs-two-color">
       <div class="gjs-trt-trait">
         <div class="gjs-label-wrp" data-label>
-          <div class="gjs-label" title="Id">Theme</div>
+          <div class="gjs-label" title="Id">{{t('grapesjs-echarts.theme.label')}}</div>
         </div>
         <div class="gjs-field-wrp gjs-field-wrp--text">
-            <div class="gjs-field gjs-field-text">
-              <select v-model="theme" data-input>
-                 <option value="" disabled selected>Select a Theme</option>
-                <option value="macarons">Macarons</option>
-                <option value="dark">Dark</option>
-                <option value="dark-blue">Dark Blue</option>
-              </select>
-            </div>
+          <div class="gjs-field gjs-field-text">
+            <select v-model="theme" data-input>
+              <option value disabled selected>{{t("grapesjs-echarts.theme.placeholder")}}</option>
+              <option value="macarons">Macarons</option>
+              <option value="dark">Dark</option>
+              <option value="dark-blue">Dark Blue</option>
+            </select>
           </div>
+        </div>
       </div>
       <div class="gjs-traits-label trait-header">
-        {{label}}
+        {{t('grapesjs-echarts.items.label')}}
         <button @click="add" class="btn btn-icon">+</button>
       </div>
       <div class="gjs-trt-trait" v-for="serie in series" :key="serie.id">
@@ -42,7 +42,7 @@
       </div>
       <div class="gjs-trt-trait save-button-wrapper">
         <div class="gjs-field gjs-field-text" data-input>
-          <button class="btn btn-full" @click="save">Save</button>
+          <button class="btn btn-full" @click="save">{{t('grapesjs-echarts.items.save')}}</button>
         </div>
       </div>
     </div>
@@ -51,29 +51,30 @@
 
 <script>
 export default {
-	props: ["label", "editor", "onChange"],
-	data() {
-		return {
-			series: [],
-			theme: "",
-		};
-	},
-	methods: {
-		add() {
-			this.series.push({
-				id: new Date().getTime(),
-				label: `Category ${this.series.length+1}`,
-				value: 100,
-				color: null
-			});
-		},
-		remove(serie) {
-			this.series = this.series.filter(({ id }) => id !== serie);
-		},
-		save() {
-			this.onChange();
-		}
-	}
+  props: ["t", "editor", "onChange"],
+  data() {
+    return {
+      series: [],
+      theme: ""
+    };
+  },
+  methods: {
+    add() {
+      const categoryLabel = this.t("grapesjs-echarts.items.category");
+      this.series.push({
+        id: new Date().getTime(),
+        label: `${categoryLabel} ${this.series.length + 1}`,
+        value: 100,
+        color: null
+      });
+    },
+    remove(serie) {
+      this.series = this.series.filter(({ id }) => id !== serie);
+    },
+    save() {
+      this.onChange();
+    }
+  }
 };
 </script>
 
