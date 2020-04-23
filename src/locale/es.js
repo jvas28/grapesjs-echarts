@@ -6,10 +6,11 @@ export default {
     },
     items: {
       label: "Elementos",
-      category: "Categoria",
+      category: "Categoría",
       color: "Color",
       save: "Guardar",
     },
+    category: "Gráficos",
     components: {
       bars: {
         name: "Graf. Barras",

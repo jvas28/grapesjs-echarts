@@ -4,6 +4,5 @@ export default (editor) =>
   build(editor)({
     icon,
     label: "grapesjs-echarts.components.bars.name",
-    category: "Charts",
     type: "echarts-bars",
   });

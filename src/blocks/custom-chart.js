@@ -1,7 +1,7 @@
 import icon from "../icons/custom-chart.svg";
 export default (editor) => ({
   label: `${icon} ${editor.I18n.t("grapesjs-echarts.components.custom.name")}`,
-  category: "Charts",
+  category: `${editor.I18n.t("grapesjs-echarts.category")}`,
   content: {
     tagName: "div",
     style: {

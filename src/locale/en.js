@@ -10,18 +10,19 @@ export default {
       color: "Color",
       save: "Save",
     },
+    category: "Charts",
     components: {
       bars: {
         name: "Bars Chart",
       },
       pie: {
-        name: "Bars Chart",
+        name: "Pie Chart",
       },
       donut: {
-        name: "Bars Chart",
+        name: "Donut Chart",
       },
       custom: {
-        name: "Bars Chart",
+        name: "Custom Chart",
       },
     },
   },

@@ -4,11 +4,11 @@ export default (editor) => {
     icon = DEFAULT_ICON,
     label = "grapesjs-echarts.components.MY-COMPONENT.name",
     type = "my-echart",
-    category = "Charts",
+    category = "grapesjs-echarts.category",
   }) {
     return {
       label: `${icon} ${editor.I18n.t(label)}`,
-      category,
+      category: `${editor.I18n.t(category)}`,
       content: {
         type,
         tagName: "div",

@@ -4,6 +4,5 @@ export default (editor) =>
   build(editor)({
     icon,
     label: "grapesjs-echarts.components.pie.name",
-    category: "Charts",
     type: "echarts-pie",
   });
