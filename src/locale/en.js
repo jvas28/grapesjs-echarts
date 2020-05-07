@@ -6,6 +6,7 @@ export default {
     },
     items: {
       label: "Items",
+      name: "Item",
       category: "Category",
       color: "Color",
       save: "Save",
@@ -14,6 +15,9 @@ export default {
     components: {
       bars: {
         name: "Bars Chart",
+      },
+      lines: {
+        name: "Lines Chart",
       },
       pie: {
         name: "Pie Chart",

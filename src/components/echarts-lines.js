@@ -1,12 +1,11 @@
-import build from "./buildSeries";
-
+import build from "./buildMultiseries";
 export default build({
-  name: "grapesjs-echarts.components.pie.name",
+  name: "grapesjs-echarts.components.lines.name",
   getOptions: (newSeries) => {
     const map = JSON.parse(newSeries);
     const series = [
       {
-        type: "pie",
+        type: "line",
         data: map.map(({ value, color, label }) => ({
           value,
           name: label,
@@ -14,9 +13,22 @@ export default build({
         })),
       },
     ];
+
+    const xAxis = [
+      {
+        data: map.map(({ label }) => label),
+      },
+    ];
     const options = {
       series,
+      xAxis,
+      yAxis: [
+        {
+          type: "value",
+        },
+      ],
     };
+
     return options;
   },
 });

@@ -79,7 +79,7 @@ export default ({
           resizable: true,
           traits: [
             {
-              type: "echarts-trait",
+              type: "echarts-multiseries-trait",
             },
           ],
         },

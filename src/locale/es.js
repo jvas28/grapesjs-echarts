@@ -6,6 +6,7 @@ export default {
     },
     items: {
       label: "Elementos",
+      name: "Elemento",
       category: "Categoría",
       color: "Color",
       save: "Guardar",
@@ -14,6 +15,9 @@ export default {
     components: {
       bars: {
         name: "Graf. Barras",
+      },
+      lines: {
+        name: "Graf. Líneas",
       },
       pie: {
         name: "Graf. Pastel",
