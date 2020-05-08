@@ -21,13 +21,8 @@
         <button @click="add" class="btn btn-icon">+</button>
       </div>
 
-      <div
-        class="gjs-trt-trait"
-        style="background:#262b3a; display:flex; flex-direction:column; margin-bottom:10px;"
-        v-for="serie in series"
-        :key="serie.id"
-      >
-        <div style="display: flex; flex-direction:row;">
+      <div class="gjs-trt-trait series" v-for="(serie, index) in series" :key="serie.id">
+        <div class="item">
           <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
             <div class="gjs-field gjs-field-text" data-input>
               <input type="text" placeholder="eg. 2019" v-model="serie.label" />
@@ -42,7 +37,12 @@
             <button class="btn btn-icon" @click="remove(serie.id)">-</button>
           </div>
         </div>
-        <series-values v-model="serie.values" :t="t"></series-values>
+        <series-values
+          v-model="serie.values"
+          :t="t"
+          :lead="index===0"
+          @categoriesChange="updateCategories"
+        ></series-values>
       </div>
       <div class="gjs-trt-trait save-button-wrapper">
         <div class="gjs-field gjs-field-text" data-input>
@@ -63,10 +63,41 @@ export default {
   data() {
     return {
       series: [],
+      categories: [],
       theme: ""
     };
   },
+  watch: {
+    categories(categories) {
+      const categoryLabel = this.t("grapesjs-echarts.items.category");
+      const series = this.series;
+      const lead = series[0];
+      this.series = series.map(serie => {
+        if (lead.id === serie.id) return serie;
+        return {
+          ...serie,
+          values: categories.map((search, index) => {
+            const found = serie.values.find(({ category }) => {
+              return search === category;
+            });
+            console.log({ ...found });
+            if (found) {
+              return { ...found };
+            }
+            return {
+              id: new Date().getTime(),
+              category: `${categoryLabel} ${index + 1}`,
+              value: 100
+            };
+          })
+        };
+      });
+    }
+  },
   methods: {
+    updateCategories(categories) {
+      this.categories = categories;
+    },
     add() {
       const categoryLabel = this.t("grapesjs-echarts.items.category");
       const nameLabel = this.t("grapesjs-echarts.items.name");
@@ -75,6 +106,7 @@ export default {
         label: `${nameLabel} ${this.series.length + 1}`,
         values: [
           {
+            id: new Date().getTime(),
             category: `${categoryLabel} 1`,
             value: 100
           }
@@ -94,31 +126,47 @@ export default {
 
 <style lang='scss' scoped>
 .gjs-trt-traits {
-  .trait-header {
+  .gjs-trt-trait {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .gjs-field-wrp {
-    margin: 2px;
-  }
-  .save-button-wrapper {
-    width: 100%;
-    .gjs-field {
-      width: calc(100% - 12px);
+    &.series {
+      flex-direction: column;
+      background: rgba(0, 0, 0, 0.3);
+      .item {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.1);
+      }
     }
-  }
-  .btn {
-    background: transparent;
-    color: white;
-    border: none;
-    cursor: pointer;
-    &.btn-icon {
-      font-size: 20px;
+    margin-bottom: 10px;
+    .trait-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
     }
-    &.btn-full {
+    .gjs-field-wrp {
+      margin: 2px;
+    }
+    .save-button-wrapper {
       width: 100%;
-      font-size: 14px;
+      .gjs-field {
+        width: calc(100% - 12px);
+      }
+    }
+    .btn {
+      background: transparent;
+      color: white;
+      border: none;
+      cursor: pointer;
+      &.btn-icon {
+        font-size: 20px;
+      }
+      &.btn-full {
+        width: 100%;
+        font-size: 14px;
+      }
     }
   }
 }
