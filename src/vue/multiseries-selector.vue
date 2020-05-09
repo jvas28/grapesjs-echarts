@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       series: [],
-      categories: [],
+      categories: [this.t("grapesjs-echarts.items.category")],
       theme: ""
     };
   },
@@ -99,18 +99,15 @@ export default {
       this.categories = categories;
     },
     add() {
-      const categoryLabel = this.t("grapesjs-echarts.items.category");
       const nameLabel = this.t("grapesjs-echarts.items.name");
       this.series.push({
         id: new Date().getTime(),
         label: `${nameLabel} ${this.series.length + 1}`,
-        values: [
-          {
-            id: new Date().getTime(),
-            category: `${categoryLabel} 1`,
-            value: 100
-          }
-        ],
+        values: this.categories.map(category => ({
+          id: new Date().getTime(),
+          category,
+          value: 100
+        })),
         color: null
       });
     },
@@ -128,9 +125,12 @@ export default {
 .gjs-trt-traits {
   .gjs-trt-trait {
     display: flex;
+    width: 100%;
+    margin-bottom: 10px;
     &.series {
       flex-direction: column;
       background: rgba(0, 0, 0, 0.3);
+      padding: 3px;
       .item {
         display: flex;
         flex-direction: row;
@@ -140,7 +140,10 @@ export default {
         background: rgba(255, 255, 255, 0.1);
       }
     }
-    margin-bottom: 10px;
+    .gjs-trait-label {
+      padding: 0;
+    }
+
     .trait-header {
       display: flex;
       flex-direction: row;

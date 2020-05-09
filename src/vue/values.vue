@@ -14,7 +14,7 @@
         <div class="gjs-label" title="Id">{{v.category}}</div>
       </div>
       <div class="gjs-field gjs-field-text" data-input>
-        <input type="text" placeholder="eg. 2000" :value="v.value" />
+        <input type="text" placeholder="eg. 2000" v-model="v.value" />
       </div>
       <div v-if="lead && index > 0" class="gjs-field gjs-field-text" data-input>
         <button class="btn btn-icon danger" @click="remove(v.id)">-</button>
@@ -38,11 +38,16 @@ export default {
   methods: {
     add() {
       const categoryLabel = this.t("grapesjs-echarts.items.category");
+      let category = `${categoryLabel} ${this.value.length + 1}`;
+      const categories = this.value.map(({ category }) => category);
+      while (categories.includes(category)) {
+        category += "n";
+      }
       const values = [
         ...this.value,
         {
           id: new Date().getTime(),
-          category: `${categoryLabel} ${this.value.length + 1}`,
+          category,
           value: 100
         }
       ];
