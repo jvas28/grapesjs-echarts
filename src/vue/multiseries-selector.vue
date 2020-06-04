@@ -3,12 +3,16 @@
     <div class="gjs-trt-traits gjs-one-bg gjs-two-color">
       <div class="gjs-trt-trait">
         <div class="gjs-label-wrp" data-label>
-          <div class="gjs-label" title="Id">{{t('grapesjs-echarts.theme.label')}}</div>
+          <div class="gjs-label" title="Id">
+            {{ t("grapesjs-echarts.theme.label") }}
+          </div>
         </div>
         <div class="gjs-field-wrp gjs-field-wrp--text">
           <div class="gjs-field gjs-field-text">
             <select v-model="theme" data-input>
-              <option value disabled selected>{{t("grapesjs-echarts.theme.placeholder")}}</option>
+              <option value disabled selected>{{
+                t("grapesjs-echarts.theme.placeholder")
+              }}</option>
               <option value="macarons">Macarons</option>
               <option value="dark">Dark</option>
               <option value="dark-blue">Dark Blue</option>
@@ -17,11 +21,15 @@
         </div>
       </div>
       <div class="gjs-traits-label trait-header">
-        {{t('grapesjs-echarts.items.label')}}
+        {{ t("grapesjs-echarts.items.label") }}
         <button @click="add" class="btn btn-icon">+</button>
       </div>
 
-      <div class="gjs-trt-trait series" v-for="(serie, index) in series" :key="serie.id">
+      <div
+        class="gjs-trt-trait series"
+        v-for="(serie, index) in series"
+        :key="serie.id"
+      >
         <div class="item">
           <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
             <div class="gjs-field gjs-field-text" data-input>
@@ -40,13 +48,14 @@
         <series-values
           v-model="serie.values"
           :t="t"
-          :lead="index===0"
-          @categoriesChange="updateCategories"
+          :lead="index === 0"
         ></series-values>
       </div>
       <div class="gjs-trt-trait save-button-wrapper">
         <div class="gjs-field gjs-field-text" data-input>
-          <button class="btn btn-full" @click="save">{{t('grapesjs-echarts.items.save')}}</button>
+          <button class="btn btn-full" @click="save">
+            {{ t("grapesjs-echarts.items.save") }}
+          </button>
         </div>
       </div>
     </div>
@@ -58,57 +67,65 @@ import values from "./values.vue";
 export default {
   props: ["t", "editor", "onChange"],
   components: {
-    "series-values": values
+    "series-values": values,
   },
   data() {
     return {
       series: [],
-      categories: [this.t("grapesjs-echarts.items.category")],
-      theme: ""
+      theme: "",
     };
   },
   watch: {
-    categories(categories) {
-      const categoryLabel = this.t("grapesjs-echarts.items.category");
-      const series = this.series;
-      const lead = series[0];
-      this.series = series.map(serie => {
-        if (lead.id === serie.id) return serie;
-        return {
-          ...serie,
-          values: categories.map((search, index) => {
-            const found = serie.values.find(({ category }) => {
-              return search === category;
-            });
-            console.log({ ...found });
-            if (found) {
-              return { ...found };
-            }
-            return {
-              id: new Date().getTime(),
-              category: `${categoryLabel} ${index + 1}`,
-              value: 100
-            };
-          })
-        };
-      });
-    }
+    categories(categories, old) {
+      const isDifferent =
+        categories.filter((v) => !old.includes(v)).length > 0 ||
+        categories.length !== old.length;
+      if (isDifferent) {
+        const series = this.series;
+        const [lead] = series;
+        this.series = series.map((serie) => {
+          if (lead.id === serie.id) return serie;
+          return {
+            ...serie,
+            values: categories.map((search, index) => {
+              const found = serie.values.find(({ category }) => {
+                return search === category;
+              });
+              if (found) {
+                return { ...found, category: lead.values[index].category };
+              }
+              return {
+                id: new Date().getTime(),
+                category: lead.values[index].category,
+                value: 100,
+              };
+            }),
+          };
+        });
+      }
+    },
+  },
+  computed: {
+    categories() {
+      const [lead] = this.series;
+      if (lead) {
+        return lead.values.map(({ category }) => category);
+      }
+      return [];
+    },
   },
   methods: {
-    updateCategories(categories) {
-      this.categories = categories;
-    },
     add() {
       const nameLabel = this.t("grapesjs-echarts.items.name");
       this.series.push({
         id: new Date().getTime(),
         label: `${nameLabel} ${this.series.length + 1}`,
-        values: this.categories.map(category => ({
+        values: this.categories.map((category) => ({
           id: new Date().getTime(),
           category,
-          value: 100
+          value: 100,
         })),
-        color: null
+        color: null,
       });
     },
     remove(serie) {
@@ -116,12 +133,12 @@ export default {
     },
     save() {
       this.onChange();
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .gjs-trt-traits {
   .gjs-trt-trait {
     display: flex;

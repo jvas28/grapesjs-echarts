@@ -8,10 +8,10 @@
       :key="index"
     >
       <div v-if="lead" class="gjs-field gjs-field-text" data-input>
-        <input type="text" placeholder="eg. 01-28-1994" :value="v.category" />
+        <input type="text" placeholder="eg. 01-28-1994" v-model="v.category" />
       </div>
       <div v-if="!lead" class="gjs-label-wrp" data-label>
-        <div class="gjs-label" title="Id">{{v.category}}</div>
+        <div class="gjs-label" title="Category">{{v.category}}</div>
       </div>
       <div class="gjs-field gjs-field-text" data-input>
         <input type="text" placeholder="eg. 2000" v-model="v.value" />
@@ -68,11 +68,6 @@ export default {
           removed.map(({ category }) => category)
         );
       }
-    },
-    typing(index) {
-      return e => {
-        this.values[index] = e.target.value;
-      };
     },
     save() {
       this.$emit("input", this.values);

@@ -77,6 +77,24 @@ export default ({
           // Default props
           name: editor.I18n.t(name),
           resizable: true,
+          attributes: {
+            "data-ecg-series": JSON.stringify([
+              {
+                id: new Date().getTime(),
+                name: "Category I",
+                values: [
+                  {
+                    id: new Date().getTime(),
+                    category: "Category 1",
+                    value: 100,
+                  },
+                ],
+                label: "Item I",
+                color: null,
+              },
+            ]),
+            "data-ecg-theme": "",
+          },
           traits: [
             {
               type: "echarts-multiseries-trait",
