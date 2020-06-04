@@ -144,8 +144,20 @@ $ npm run build
 
 Designed by [Smartline](https://www.flaticon.com/authors/smartline) from [www.flaticon.com](www.flaticon.com)
 
+## Roadmap V1
+
+- [x] Basic Bars Chart
+- [x] Basic Pie Chart
+- [x] Basic Donut Chart
+- [x] Basic Lines Chart
+- [ ] Tooltip trait
+- [ ] Toolbox trait
+- [ ] Legend trait
+- [ ] Grid trait
+
 ## Screenshots
 
+![Lines](screenshots/lines-chart.png)
 ![Bars](screenshots/bars-chart.png)
 ![Pie](screenshots/pie-chart.png)
 ![Donut](screenshots/donut-chart.png)
