@@ -29,7 +29,6 @@ export default (editor, { intl = {}, ...restOpts }) => {
     optLocales[lang]["grapesjs-echarts"] = def;
   });
   const locales = merge({ en, es }, optLocales);
-  console.log(locales);
   editor.I18n &&
     editor.I18n.addMessages(locales) &&
     editor.I18n.setLocale(locale);
