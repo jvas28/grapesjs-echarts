@@ -11,11 +11,12 @@ Check a basic result [here](https://codepen.io/jvas28/pen/qBdRWBp).
 
 ## Available Components :bar_chart:
 
-Currently there are only 3 chart components.
+Currently there are only 4 chart components.
 
 - `Bars Chart`
 - `Pie Chart`
 - `Donut Chart`
+- `Lines Chart`
 
 And a special one, the `Custom Chart` which will allow you to create any type of chart by adding `echarts.options` in JSON string format while I keep bringing more `Chart Components` and `Settings`.
 
