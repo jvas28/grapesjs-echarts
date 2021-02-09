@@ -39,12 +39,12 @@
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.2"
   },
   "license": "MIT",
   "dependencies": {
     "echarts": "^4.6.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "vue": "^2.6.11"
   }
 }

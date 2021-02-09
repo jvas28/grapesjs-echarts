@@ -14,7 +14,7 @@ export default (editor) => {
         tagName: "div",
         style: {
           width: "300px",
-          "min-height": "100px",
+          "min-height": "300px",
         },
         script: function() {
           if (!window.$grapesEcharts) {
