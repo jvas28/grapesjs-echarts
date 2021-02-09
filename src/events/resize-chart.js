@@ -5,10 +5,9 @@ export default {
     const component = editor.getSelected();
     editor.registeredComponents.map((name) => {
       if (component.is(name)) {
-        const w = editor.Canvas.getWindow();
         const instanceId = component.view.el.getAttribute("_echarts_instance_");
         if (instanceId) {
-          const instance = w.echarts.getInstanceById(instanceId);
+          const instance = editor.echarts.getInstanceById(instanceId);
           if (instance) {
             component.chart = instance;
           }

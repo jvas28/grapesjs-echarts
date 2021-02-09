@@ -48,6 +48,13 @@ export default ({
         init() {
           this.on("change:attributes:data-ecg-series", this.handleSeriesChange);
           this.on("change:attributes:data-ecg-theme", this.handleThemeChange);
+          setTimeout(() => {
+            const series = this.get("attributes")["data-ecg-series"] || "[]";
+            const options = this.getOptions(series);
+            const theme = this.get("attributes")["data-ecg-theme"] || null;
+            console.log(series, theme);
+            this.renderChart(options, theme);
+          }, 100);
         },
         handleThemeChange(component, newTheme) {
           const series = component.get("attributes")["data-ecg-series"] || [];
@@ -84,7 +91,16 @@ export default ({
           ],
         },
       },
-      view: {},
+      view: {
+        onRender({ model }) {
+          setTimeout(() => {
+            const series = model.get("attributes")["data-ecg-series"] || "[]";
+            const options = model.getOptions(series);
+            const theme = model.get("attributes")["data-ecg-theme"] || null;
+            model.renderChart(options, theme);
+          }, 50);
+        },
+      },
     };
   };
 };
