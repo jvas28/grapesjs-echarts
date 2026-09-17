@@ -1,13 +1,10 @@
 # Grapesjs Echarts
 
-[![Build Status](https://travis-ci.org/jvas28/grapesjs-echarts.svg?branch=master)](https://travis-ci.org/jvas28/grapesjs-echarts)
+Adds :chart_with_upwards_trend: chart components to [GrapesJS](https://grapesjs.com/docs/api/component.html) using the [ECharts](https://www.echartsjs.com/) library — 12 chart types, live-editable from the canvas.
 
-This is a **WORK IN PROGRESS** version of adding :chart_with_upwards_trend: chart components to [GrapesJS](https://grapesjs.com/docs/api/component.html) using [Echarts](https://www.echartsjs.com/) library.
+As of `v1.0.0` this is a stable release: rebuilt on the current GrapesJS and ECharts APIs (see [Requirements](#requirements) below), with a modern build pipeline and a much larger set of chart types than earlier `0.0.x` releases.
 
-Give it a try in
-[Code Pen](https://codepen.io/jvas28/pen/ZEGByOq).
-
-Check a basic result [here](https://codepen.io/jvas28/pen/qBdRWBp).
+> The old [Code Pen](https://codepen.io/jvas28/pen/ZEGByOq) / [basic result](https://codepen.io/jvas28/pen/qBdRWBp) demos were built against a `0.0.x` release and are out of date — follow [Usage](#usage) below for the current setup instead.
 
 ## Available Components :bar_chart:
 
@@ -164,15 +161,18 @@ $ npm run build
 
 The original Bars, Pie, Donut and Custom chart icons were designed by [Smartline](https://www.flaticon.com/authors/smartline) from [www.flaticon.com](www.flaticon.com). The icons for the newer chart types are simple hand-drawn SVGs.
 
-## Roadmap V1
+## Roadmap
 
-- [x] Basic Bars Chart
-- [x] Basic Pie Chart
-- [x] Basic Donut Chart
-- [x] Basic Lines Chart
+`v1.0.0`:
+
+- [x] Basic Bars, Pie, Donut and Lines charts
 - [x] Area, Stacked Bar, Horizontal Bar, Rose, Radar, Funnel, Gauge and Scatter charts
 - [x] Live preview while editing (no more explicit Save step)
 - [x] Color picker for items
+- [x] Rebuilt on current GrapesJS / ECharts APIs
+
+Next:
+
 - [ ] Tooltip trait
 - [ ] Toolbox trait
 - [ ] Legend trait
