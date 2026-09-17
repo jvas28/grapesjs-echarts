@@ -1,18 +1,14 @@
 function resizeComponent(editor, component) {
-  if (!component || !component.view || !component.view.el) return;
+  if (!component) return;
   editor.registeredComponents.map((name) => {
-    if (component.is(name)) {
-      const instanceId = component.view.el.getAttribute("_echarts_instance_");
-      if (instanceId) {
-        const instance = editor.echarts.getInstanceById(instanceId);
-        if (instance) {
-          component.chart = instance;
-        }
-      }
-
-      if (component.chart) {
-        component.chart.resize();
-      }
+    // The component model keeps a direct reference to its own chart
+    // instance (set in renderChart); that's used here instead of the
+    // `_echarts_instance_` DOM attribute echarts sets on init, because
+    // grapesjs's view fully rebuilds DOM attributes from the component
+    // model on every render (see ComponentView.updateAttributes), which
+    // wipes any attribute set directly on the DOM outside that model.
+    if (component.is(name) && component.chart) {
+      component.chart.resize();
     }
   });
 }

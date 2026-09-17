@@ -11,14 +11,20 @@ Check a basic result [here](https://codepen.io/jvas28/pen/qBdRWBp).
 
 ## Available Components :bar_chart:
 
-Currently there are only 4 chart components.
-
 - `Bars Chart`
+- `Horizontal Bar Chart`
+- `Stacked Bar Chart`
+- `Lines Chart`
+- `Area Chart`
 - `Pie Chart`
 - `Donut Chart`
-- `Lines Chart`
+- `Rose Chart`
+- `Radar Chart`
+- `Funnel Chart`
+- `Gauge Chart`
+- `Scatter Chart`
 
-And a special one, the `Custom Chart` which will allow you to create any type of chart by adding `echarts.options` in JSON string format while I keep bringing more `Chart Components` and `Settings`.
+And a special one, the `Custom Chart` which will allow you to create any type of chart by adding `echarts.options` in JSON string format.
 
 <p align="center">
 <img src="screenshots/blocks.png" width="200">
@@ -26,17 +32,18 @@ And a special one, the `Custom Chart` which will allow you to create any type of
 
 ## Available Settings
 
-- Theme
-- Items
+- Theme — the full set of [ECharts built-in themes](https://echarts.apache.org/en/download-theme.html), loaded on demand
+- Items — automatically applied as you edit, no explicit save step
   - Name
-  - Value
-  - Color
+  - Value (or, for Scatter, X/Y points)
+  - Color — native color picker, defaults to an auto-assigned palette
+- Min / Max — `Gauge Chart` only
 
 <p align="center">
 <img src="screenshots/setup.png" width="200">
 </p>
 
-This settings are available for all components but `Custom Chart`.
+These settings are available for all components but `Custom Chart`.
 
 ## I18n Support
 
@@ -155,7 +162,7 @@ $ npm run build
 
 ### Icons
 
-Designed by [Smartline](https://www.flaticon.com/authors/smartline) from [www.flaticon.com](www.flaticon.com)
+The original Bars, Pie, Donut and Custom chart icons were designed by [Smartline](https://www.flaticon.com/authors/smartline) from [www.flaticon.com](www.flaticon.com). The icons for the newer chart types are simple hand-drawn SVGs.
 
 ## Roadmap V1
 
@@ -163,6 +170,9 @@ Designed by [Smartline](https://www.flaticon.com/authors/smartline) from [www.fl
 - [x] Basic Pie Chart
 - [x] Basic Donut Chart
 - [x] Basic Lines Chart
+- [x] Area, Stacked Bar, Horizontal Bar, Rose, Radar, Funnel, Gauge and Scatter charts
+- [x] Live preview while editing (no more explicit Save step)
+- [x] Color picker for items
 - [ ] Tooltip trait
 - [ ] Toolbox trait
 - [ ] Legend trait

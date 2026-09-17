@@ -1,6 +1,6 @@
-import SeriesSelector from "../vue/multiseries-selector.vue";
+import ScatterSelector from "../vue/scatter-selector.vue";
+
 export default {
-  // Expects as return a simple HTML string or an HTML element
   noLabel: true,
   createInput({ component }) {
     const editor = component.em.get("Editor");
@@ -8,7 +8,7 @@ export default {
     const { Vue } = editor;
     const vueInstance = new Vue({
       render: (h) =>
-        h(SeriesSelector, {
+        h(ScatterSelector, {
           props: {
             editor,
             t: (key) => intl.t(key),
@@ -20,7 +20,6 @@ export default {
     this.inputInstance = inputInstance;
     return vueInstance.$el;
   },
-  // Update the component based element changes
   onEvent({ component }) {
     const { series, theme } = this.inputInstance;
     component.addAttributes({

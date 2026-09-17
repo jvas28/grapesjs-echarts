@@ -2,43 +2,21 @@ import loadTheme from "../utils/loadTheme";
 
 const DEFAULT_GET_OPTIONS = function(newSeries) {
   const map = JSON.parse(newSeries);
-  const series = [
-    {
-      type: "pie",
-      radius: ["40%", "70%"],
-      label: {
-        normal: {
-          show: false,
-          position: "center",
-        },
-        emphasis: {
-          show: true,
-          textStyle: {
-            fontSize: "14",
-          },
-        },
-      },
-      labelLine: {
-        normal: {
-          show: false,
-        },
-      },
-      data: map.map(({ value, color, label }) => ({
-        value,
-        name: label,
-        itemStyle: { color },
-      })),
-    },
-  ];
   const options = {
-    tooltip: {
-      trigger: "item",
-      formatter: "{b}: {c} ({d}%)",
-    },
-    series,
+    tooltip: { trigger: "item" },
+    legend: { data: map.map(({ label }) => label) },
+    xAxis: {},
+    yAxis: {},
+    series: map.map(({ points, color, label }) => ({
+      type: "scatter",
+      name: label,
+      itemStyle: { color },
+      data: points.map(({ x, y }) => [x, y]),
+    })),
   };
   return options;
 };
+
 export default ({
   getOptions = DEFAULT_GET_OPTIONS,
   name = "grapesjs-echarts.components.MY_COMPONENT.name",
@@ -84,14 +62,10 @@ export default ({
                 renderer: "canvas",
               });
               chart.setOption(options);
-              // Deferred: renderChart can run synchronously inside the
-              // change:attributes:data-ecg-series/theme handlers below,
-              // which themselves run inside the dispatch of an earlier
-              // addAttributes() call. Writing data-ecg-options back with
-              // addAttributes() in that same call stack re-enters the
-              // model's attribute diffing (attrUpdated) mid-dispatch and
-              // makes it re-fire change:attributes:* a second time —
-              // pushing this to a new tick avoids that.
+              // Deferred: see buildSeries.js — writing data-ecg-options
+              // back synchronously here re-enters the model's attribute
+              // diffing while it's still dispatching the change that
+              // triggered this render, causing it to double-fire.
               setTimeout(() => {
                 this.addAttributes({ "data-ecg-options": JSON.stringify(options) });
               }, 0);
@@ -107,23 +81,20 @@ export default ({
             "data-ecg-series": JSON.stringify([
               {
                 id: new Date().getTime(),
-                name: "Category I",
-                values: [
-                  {
-                    id: new Date().getTime(),
-                    category: "Category 1",
-                    value: 100,
-                  },
-                ],
-                label: "Item I",
+                label: "Series I",
                 color: null,
+                points: [
+                  { id: new Date().getTime(), x: 10, y: 20 },
+                  { id: new Date().getTime() + 1, x: 30, y: 50 },
+                  { id: new Date().getTime() + 2, x: 50, y: 30 },
+                ],
               },
             ]),
             "data-ecg-theme": "",
           },
           traits: [
             {
-              type: "echarts-multiseries-trait",
+              type: "echarts-scatter-trait",
             },
           ],
         },

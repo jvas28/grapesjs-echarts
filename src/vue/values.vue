@@ -14,7 +14,7 @@
         <div class="gjs-label" title="Category">{{v.category}}</div>
       </div>
       <div class="gjs-field gjs-field-text" data-input>
-        <input type="text" placeholder="eg. 2000" v-model="v.value" />
+        <input type="number" placeholder="eg. 2000" v-model.number="v.value" />
       </div>
       <div v-if="lead && index > 0" class="gjs-field gjs-field-text" data-input>
         <button class="btn btn-icon danger" @click="remove(v.id)">-</button>
@@ -69,10 +69,7 @@ export default {
         );
       }
     },
-    save() {
-      this.$emit("input", this.values);
-    }
-  }
+  },
 };
 </script>
 

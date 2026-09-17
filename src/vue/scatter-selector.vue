@@ -7,28 +7,34 @@
         <button @click="add" class="btn btn-icon" :title="t('grapesjs-echarts.items.add')">+</button>
       </div>
 
-      <div
-        class="gjs-trt-trait series"
-        v-for="(serie, index) in series"
-        :key="serie.id"
-      >
+      <div class="gjs-trt-trait series" v-for="serie in series" :key="serie.id">
         <div class="item">
-          <color-swatch v-model="serie.color" :fallback="fallbackColor(index)" :t="t"></color-swatch>
+          <color-swatch v-model="serie.color" :fallback="fallbackColor(serie)" :t="t"></color-swatch>
           <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
             <div class="gjs-field gjs-field-text" data-input>
               <input type="text" :placeholder="t('grapesjs-echarts.items.name')" v-model="serie.label" />
             </div>
           </div>
           <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
-            <button class="btn btn-icon" :title="t('grapesjs-echarts.items.remove')" @click="remove(serie.id)">-</button>
+            <button class="btn btn-icon" :title="t('grapesjs-echarts.items.remove')" @click="removeSeries(serie.id)">-</button>
           </div>
         </div>
-        <series-values
-          v-model="serie.values"
-          :t="t"
-          :lead="index === 0"
-          @categoriesChange="onCategoriesChange"
-        ></series-values>
+        <div class="gjs-trt-trait point" v-for="point in serie.points" :key="point.id">
+          <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
+            <div class="gjs-field gjs-field-text" data-input>
+              <input type="number" placeholder="x" v-model.number="point.x" />
+            </div>
+          </div>
+          <div class="gjs-field-wrp gjs-field-wrp--text" data-input>
+            <div class="gjs-field gjs-field-text" data-input>
+              <input type="number" placeholder="y" v-model.number="point.y" />
+            </div>
+          </div>
+          <button class="btn btn-icon danger" @click="removePoint(serie.id, point.id)">-</button>
+        </div>
+        <button class="btn btn-icon add-point" @click="addPoint(serie.id)">
+          + {{ t("grapesjs-echarts.items.point") }}
+        </button>
       </div>
       <div v-if="!series.length" class="gjs-trt-trait empty-state">
         {{ t("grapesjs-echarts.items.empty") }}
@@ -39,7 +45,6 @@
 
 <script>
 import debounce from "lodash/debounce";
-import values from "./values.vue";
 import ThemeSelect from "./ThemeSelect.vue";
 import ColorSwatch from "./ColorSwatch.vue";
 import nextColor from "./palette";
@@ -50,11 +55,7 @@ export default {
     editor: { type: Object, required: true },
     onChange: { type: Function, required: true },
   },
-  components: {
-    "series-values": values,
-    ThemeSelect,
-    ColorSwatch,
-  },
+  components: { ThemeSelect, ColorSwatch },
   data() {
     return {
       series: [],
@@ -62,34 +63,6 @@ export default {
     };
   },
   watch: {
-    categories(categories, old) {
-      const isDifferent =
-        categories.filter((v) => !old.includes(v)).length > 0 ||
-        categories.length !== old.length;
-      if (isDifferent) {
-        const series = this.series;
-        const [lead] = series;
-        this.series = series.map((serie) => {
-          if (lead.id === serie.id) return serie;
-          return {
-            ...serie,
-            values: categories.map((search, index) => {
-              const found = serie.values.find(({ category }) => {
-                return search === category;
-              });
-              if (found) {
-                return { ...found, category: lead.values[index].category };
-              }
-              return {
-                id: new Date().getTime(),
-                category: lead.values[index].category,
-                value: 100,
-              };
-            }),
-          };
-        });
-      }
-    },
     series: {
       deep: true,
       handler() {
@@ -100,22 +73,9 @@ export default {
       this.notify();
     },
   },
-  computed: {
-    categories() {
-      const [lead] = this.series;
-      if (lead) {
-        return lead.values.map(({ category }) => category);
-      }
-      return [];
-    },
-  },
   methods: {
-    fallbackColor(index) {
-      return nextColor(index);
-    },
-    onCategoriesChange() {
-      // categories computed prop + its watcher already keep every series'
-      // values in sync; nothing else to do here.
+    fallbackColor(serie) {
+      return nextColor(this.series.indexOf(serie));
     },
     snapshot() {
       return JSON.stringify({ series: this.series, theme: this.theme });
@@ -136,16 +96,23 @@ export default {
       this.series.push({
         id: new Date().getTime(),
         label: `${nameLabel} ${this.series.length + 1}`,
-        values: this.categories.map((category) => ({
-          id: new Date().getTime(),
-          category,
-          value: 100,
-        })),
         color: nextColor(this.series.length),
+        points: [
+          { id: new Date().getTime(), x: 10, y: 10 },
+          { id: new Date().getTime() + 1, x: 20, y: 30 },
+        ],
       });
     },
-    remove(serie) {
-      this.series = this.series.filter(({ id }) => id !== serie);
+    removeSeries(id) {
+      this.series = this.series.filter((serie) => serie.id !== id);
+    },
+    addPoint(seriesId) {
+      const serie = this.series.find(({ id }) => id === seriesId);
+      serie.points.push({ id: new Date().getTime(), x: 0, y: 0 });
+    },
+    removePoint(seriesId, pointId) {
+      const serie = this.series.find(({ id }) => id === seriesId);
+      serie.points = serie.points.filter(({ id }) => id !== pointId);
     },
     notify() {
       if (this.snapshot() === this.lastSaved) return;
@@ -183,14 +150,9 @@ export default {
         background: rgba(255, 255, 255, 0.1);
       }
     }
-    .gjs-trait-label {
-      padding: 0;
-    }
-
-    .trait-header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+    &.point {
+      align-items: center;
+      padding-left: 6px;
     }
     .gjs-field-wrp {
       margin: 2px;
@@ -201,18 +163,23 @@ export default {
       font-style: italic;
       padding: 6px 2px;
     }
-    .btn {
-      background: transparent;
-      color: white;
-      border: none;
-      cursor: pointer;
-      &.btn-icon {
-        font-size: 20px;
-      }
-      &.btn-full {
-        width: 100%;
-        font-size: 14px;
-      }
+  }
+  .add-point {
+    align-self: flex-start;
+    margin-left: 6px;
+    font-size: 11px;
+  }
+  .btn {
+    background: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    &.btn-icon {
+      font-size: 20px;
+    }
+    &.danger {
+      background: rgb(173, 94, 94);
+      font-size: 14px;
     }
   }
 }

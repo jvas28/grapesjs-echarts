@@ -4,12 +4,19 @@ export default function(editor) {
     model: {
       init() {
         this.on("change:attributes:data-ecg-options", this.handleOptionsChange);
-        setTimeout(() => {
-          const opt = this.get("attributes")["data-ecg-options"];
-          if (opt) {
-            this.handleOptionsChange(this, opt);
-          }
-        }, 100);
+        setTimeout(() => this.renderIfNeeded(), 100);
+      },
+      // The view may not have a DOM node yet when init() runs, and the
+      // view's own onRender may fire before or after this timeout — both
+      // paths call this, and whichever runs first performs the one and
+      // only initial paint. Later edits go through handleOptionsChange
+      // via the attribute-change listener above instead.
+      renderIfNeeded() {
+        if (this.chart || !this.view || !this.view.el) return;
+        const opt = this.get("attributes")["data-ecg-options"];
+        if (opt) {
+          this.handleOptionsChange(this, opt);
+        }
       },
       handleOptionsChange(a, opt) {
         const options = JSON.parse(opt);
@@ -39,12 +46,7 @@ export default function(editor) {
     },
     view: {
       onRender({ model }) {
-        setTimeout(() => {
-          const opt = model.get("attributes")["data-ecg-options"];
-          if (opt) {
-            model.handleOptionsChange(model, opt);
-          }
-        }, 50);
+        setTimeout(() => model.renderIfNeeded(), 50);
       },
     },
   };
