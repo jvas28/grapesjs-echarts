@@ -40,7 +40,7 @@ And a special one, the `Custom Chart` which will allow you to create any type of
 - Min / Max — `Gauge Chart` only
 
 <p align="center">
-<img src="screenshots/setup.png" width="200">
+<img src="screenshots/setup.png" width="600">
 </p>
 
 These settings are available for all components but `Custom Chart`.
@@ -180,10 +180,16 @@ The original Bars, Pie, Donut and Custom chart icons were designed by [Smartline
 
 ## Screenshots
 
-![Lines](screenshots/lines-chart.png)
+### New in this version
+
+![Area, Stacked Bar, Radar, Funnel, Rose, Horizontal Bar, Gauge and Scatter charts](screenshots/new-charts.png)
+
+### Original charts
+
 ![Bars](screenshots/bars-chart.png)
 ![Pie](screenshots/pie-chart.png)
 ![Donut](screenshots/donut-chart.png)
+![Lines](screenshots/lines-chart.png)
 
 ## License
 
