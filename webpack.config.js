@@ -57,7 +57,7 @@ module.exports = (env = {}) => {
 					test: /\.scss$/,
 					use: [
 						"vue-style-loader",
-						{ loader: "css-loader", options: { esModule: false } },
+						"css-loader",
 						{ loader: "sass-loader", options: { api: "modern" } },
 					],
 				},
@@ -65,5 +65,12 @@ module.exports = (env = {}) => {
 		},
 		plugins: [...corePlugins, new VueLoaderPlugin()],
 		externals: { grapesjs: "grapesjs", echarts: "echarts" },
+		// vue-loader 15 emits a bare `import style0 from "*.vue?vue&type=style..."`
+		// per <style> block purely for its side effect (triggering vue-style-loader's
+		// runtime injection); style0 is never read. vue-style-loader's pitched output
+		// is plain CommonJS with no `default` key, so webpack 5's stricter ESM/CJS
+		// interop check warns even though nothing is broken.
+		// https://github.com/vuejs/vue-loader/issues/1854
+		ignoreWarnings: [/export 'default' \(imported as '\w+'\) was not found/],
 	};
 };
