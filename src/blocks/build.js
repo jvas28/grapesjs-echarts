@@ -44,7 +44,7 @@ export default (editor) => {
                 const script = document.createElement("script");
                 script.onload = init;
                 window.$grapesEcharts.themes.push(theme);
-                script.src = `https://unpkg.com/echarts@4.6.0/theme/${theme}.js`;
+                script.src = `https://unpkg.com/echarts@${echarts.version}/theme/${theme}.js`;
                 document.body.appendChild(script);
               } else {
                 init();
@@ -56,8 +56,7 @@ export default (editor) => {
           if (typeof echarts === "undefined") {
             const script = document.createElement("script");
             script.onload = themeCheck;
-            script.src =
-              "https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts-en.min.js";
+            script.src = "https://unpkg.com/echarts@6/dist/echarts.min.js";
             document.body.appendChild(script);
           } else {
             themeCheck();

@@ -4,14 +4,24 @@ export default function(editor) {
     model: {
       init() {
         this.on("change:attributes:data-ecg-options", this.handleOptionsChange);
+        setTimeout(() => {
+          const opt = this.get("attributes")["data-ecg-options"];
+          if (opt) {
+            this.handleOptionsChange(this, opt);
+          }
+        }, 100);
       },
       handleOptionsChange(a, opt) {
         const options = JSON.parse(opt);
         if (options) {
+          if (this.chart) {
+            editor.echarts.dispose(this.chart);
+          }
           const chart = editor.echarts.init(this.view.el, null, {
             renderer: "canvas",
           });
           chart.setOption(options);
+          this.chart = chart;
         }
       },
       defaults: {
@@ -27,6 +37,15 @@ export default function(editor) {
         ],
       },
     },
-    view: {},
+    view: {
+      onRender({ model }) {
+        setTimeout(() => {
+          const opt = model.get("attributes")["data-ecg-options"];
+          if (opt) {
+            model.handleOptionsChange(model, opt);
+          }
+        }, 50);
+      },
+    },
   };
 }

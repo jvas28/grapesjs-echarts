@@ -63,6 +63,16 @@ pluginsOpts: {
 
 Reference [locale](https://github.com/jvas28/grapesjs-echarts/tree/master/src/locale) folder to get the idea of the structure for labels.
 
+## Requirements
+
+This plugin does not bundle `grapesjs` or `echarts` &mdash; both are peer
+dependencies, so your app supplies a single shared copy of each (this also
+avoids the "two different echarts instances" errors some bundlers, like
+Vite, would otherwise throw). Supported versions:
+
+- `grapesjs` >= 0.19
+- `echarts` ^5 or ^6
+
 ## Usage
 
 Directly in the browser
@@ -73,6 +83,7 @@ Directly in the browser
   rel="stylesheet"
 />
 <script src="https://unpkg.com/grapesjs"></script>
+<script src="https://unpkg.com/echarts@6"></script>
 <script src="https://unpkg.com/grapesjs-echarts.min.js"></script>
 
 <div id="gjs"></div>
@@ -97,6 +108,7 @@ Modern javascript
 import grapesjs from 'grapesjs';
 import plugin from 'grapesjs-echarts';
 import 'grapesjs/dist/css/grapes.min.css';
+// echarts must be installed (it's a peer dependency), no import needed here
 
 const editor = grapesjs.init({
   container : '#gjs',

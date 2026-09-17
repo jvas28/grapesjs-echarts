@@ -1,3 +1,5 @@
+import loadTheme from "../utils/loadTheme";
+
 const DEFAULT_GET_OPTIONS = function(newSeries) {
   const map = JSON.parse(newSeries);
   const series = [
@@ -52,12 +54,11 @@ export default ({
             const series = this.get("attributes")["data-ecg-series"] || "[]";
             const options = this.getOptions(series);
             const theme = this.get("attributes")["data-ecg-theme"] || null;
-            console.log(series, theme);
             this.renderChart(options, theme);
           }, 100);
         },
         handleThemeChange(component, newTheme) {
-          const series = component.get("attributes")["data-ecg-series"] || [];
+          const series = component.get("attributes")["data-ecg-series"] || "[]";
           const options = this.getOptions(series);
           this.renderChart(options, newTheme);
         },
@@ -69,15 +70,17 @@ export default ({
         getOptions,
         renderChart(options, theme) {
           if (options) {
-            if (this.chart) {
-              editor.echarts.dispose(this.chart);
-            }
-            const chart = editor.echarts.init(this.view.el, theme, {
-              renderer: "canvas",
+            loadTheme(editor.echarts, theme, () => {
+              if (this.chart) {
+                editor.echarts.dispose(this.chart);
+              }
+              const chart = editor.echarts.init(this.view.el, theme, {
+                renderer: "canvas",
+              });
+              chart.setOption(options);
+              this.addAttributes({ "data-ecg-options": JSON.stringify(options) });
+              this.chart = chart;
             });
-            chart.setOption(options);
-            this.addAttributes({ "data-ecg-options": JSON.stringify(options) });
-            this.chart = chart;
           }
         },
         defaults: {

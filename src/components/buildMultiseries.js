@@ -1,3 +1,5 @@
+import loadTheme from "../utils/loadTheme";
+
 const DEFAULT_GET_OPTIONS = function(newSeries) {
   const map = JSON.parse(newSeries);
   const series = [
@@ -48,9 +50,15 @@ export default ({
         init() {
           this.on("change:attributes:data-ecg-series", this.handleSeriesChange);
           this.on("change:attributes:data-ecg-theme", this.handleThemeChange);
+          setTimeout(() => {
+            const series = this.get("attributes")["data-ecg-series"] || "[]";
+            const options = this.getOptions(series);
+            const theme = this.get("attributes")["data-ecg-theme"] || null;
+            this.renderChart(options, theme);
+          }, 100);
         },
         handleThemeChange(component, newTheme) {
-          const series = component.get("attributes")["data-ecg-series"] || [];
+          const series = component.get("attributes")["data-ecg-series"] || "[]";
           const options = this.getOptions(series);
           this.renderChart(options, newTheme);
         },
@@ -62,15 +70,17 @@ export default ({
         getOptions,
         renderChart(options, theme) {
           if (options) {
-            if (this.chart) {
-              editor.echarts.dispose(this.chart);
-            }
-            const chart = editor.echarts.init(this.view.el, theme, {
-              renderer: "canvas",
+            loadTheme(editor.echarts, theme, () => {
+              if (this.chart) {
+                editor.echarts.dispose(this.chart);
+              }
+              const chart = editor.echarts.init(this.view.el, theme, {
+                renderer: "canvas",
+              });
+              chart.setOption(options);
+              this.addAttributes({ "data-ecg-options": JSON.stringify(options) });
+              this.chart = chart;
             });
-            chart.setOption(options);
-            this.addAttributes({ "data-ecg-options": JSON.stringify(options) });
-            this.chart = chart;
           }
         },
         defaults: {
@@ -102,7 +112,16 @@ export default ({
           ],
         },
       },
-      view: {},
+      view: {
+        onRender({ model }) {
+          setTimeout(() => {
+            const series = model.get("attributes")["data-ecg-series"] || "[]";
+            const options = model.getOptions(series);
+            const theme = model.get("attributes")["data-ecg-theme"] || null;
+            model.renderChart(options, theme);
+          }, 50);
+        },
+      },
     };
   };
 };

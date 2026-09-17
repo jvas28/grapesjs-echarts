@@ -4,12 +4,9 @@ import loadTraits from "./traitsRegister";
 import events from "./events";
 import en from "./locale/en";
 import es from "./locale/es";
-import echarts from "echarts";
+import * as echarts from "echarts";
 import Vue from "vue";
 import merge from "lodash/merge";
-require("echarts/theme/dark");
-require("echarts/theme/macarons");
-require("echarts/theme/dark-blue");
 
 export default (editor, { intl = {}, ...restOpts }) => {
   const { locale = "en", messages = { en } } = intl;

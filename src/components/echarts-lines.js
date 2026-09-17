@@ -4,24 +4,14 @@ export default build({
   getOptions: (newSeries) => {
     const map = JSON.parse(newSeries);
     const [lead] = map;
-    const categories = lead.values.map(({ category }) => category);
-    const legend = lead.values.map(({ label }) => label);
+    const categories = lead ? lead.values.map(({ category }) => category) : [];
+    const legend = map.map(({ label }) => label);
     const series = map.map(({ values, color, label }) => ({
       type: "line",
       data: values.map(({ value }) => value),
       name: label,
       itemStyle: { color },
     }));
-    [
-      {
-        type: "line",
-        data: map.map(({ value, color, label }) => ({
-          value,
-          name: label,
-          itemStyle: { color },
-        })),
-      },
-    ];
 
     const xAxis = {
       type: "category",
