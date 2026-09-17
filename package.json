@@ -6,8 +6,13 @@
   "author": "Julio Vasconez",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jvas28/grapesjs-echarts.git"
+    "url": "git+https://github.com/jvas28/grapesjs-echarts.git"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack --env production",

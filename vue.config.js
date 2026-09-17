@@ -1,3 +1,0 @@
-module.exports = {
-    runtimerCompiler: true
-  }
