@@ -6,6 +6,8 @@ As of `v1.0.0` this is a stable release: rebuilt on the current GrapesJS and ECh
 
 > The old [Code Pen](https://codepen.io/jvas28/pen/ZEGByOq) / [basic result](https://codepen.io/jvas28/pen/qBdRWBp) demos were built against a `0.0.x` release and are out of date — follow [Usage](#usage) below for the current setup instead.
 
+See [CHANGELOG.md](CHANGELOG.md) for what's new, and [Migrating from 0.0.x](#migrating-from-00x) if you're upgrading.
+
 ## Available Components :bar_chart:
 
 - `Bars Chart`
@@ -76,6 +78,14 @@ Vite, would otherwise throw). Supported versions:
 
 - `grapesjs` >= 0.19
 - `echarts` ^5 or ^6
+
+## Migrating from 0.0.x
+
+`v1.0.0` is a breaking change if you're coming from a `0.0.x` release:
+
+1. **Install `echarts` yourself.** It used to be bundled into this plugin; now it's a peer dependency (see [Requirements](#requirements) above), so `npm install echarts` (or add the `<script src="https://unpkg.com/echarts@6">` tag — see [Usage](#usage) below) in your own app. This is also what fixes the "two different echarts instances" crash some bundlers (Vite in particular) used to throw.
+2. **Nothing else changes in how you call the plugin** — `grapesjs.init({ plugins: ["grapesjs-echarts"], ... })` and `pluginsOpts` work exactly as before. Component/trait/block names, the `intl` options, and the theme names are all unchanged.
+3. If you saved projects with `storageManager` under `0.0.x`, they'll load fine — the stored `data-ecg-*` attributes didn't change shape.
 
 ## Usage
 
